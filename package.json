@@ -1,0 +1,16 @@
+{
+  "name": "apricity-github-action",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:apricity-dev/apricity-github-action.git",
+  "author": "Guillaume Gaulard <guillaume@apricity.life>",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "@vercel/ncc": "^0.31.1"
+  },
+  "scripts": {
+    "build": "ncc build index.js --license licenses.txt"
+  }
+}
