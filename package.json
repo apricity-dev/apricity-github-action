@@ -8,9 +8,10 @@
   "dependencies": {
     "@actions/core": "^1.6.0",
     "@actions/github": "^5.0.0",
-    "@vercel/ncc": "^0.31.1"
+    "@vercel/ncc": "^0.31.1",
+    "jira-client": "^6.23.0"
   },
   "scripts": {
-    "build": "ncc build index.js --license licenses.txt"
+    "build": "ncc build src/index.js --license licenses.txt"
   }
 }

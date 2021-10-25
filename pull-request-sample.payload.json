@@ -1,0 +1,11 @@
+{
+  "pull_request": {
+    "number": "123",
+    "head": {
+      "ref": "APR-2471"
+    },
+    "base": {
+      "ref": "refs/heads/main"
+    }
+  }
+}

@@ -1,13 +1,21 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Apricity Jira Integrity Check'
+description: 'Check that a pull request has a valid ticket on Jira and that this ticket has the correct state'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  jira_issue_prefix:
+    description: 'An array of jira issue prefixes separated by comma ,'
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  jira_username:
+    description: 'Jira username to connect to Jira API'
+    required: true
+  jira_password:
+    description: 'Jira password to connect to Jira API'
+    required: true
+  base_ref_branch:
+    description: 'The base ref branch : where the pull request will be merged to'
+    required: true
+  head_ref_branch:
+    description: 'The head ref branch : the source branch the pull request was created'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
