@@ -45036,7 +45036,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const { jiraService } = __nccwpck_require__(6743);
 
-const OBSERVABLE_TARGET_BRANCHES = ["main", "qa", "develop"];
+const PRINCIPAL_BRANCHES = ["main", "qa", "develop"];
 
 const input = {
   getSourceBranch: () => core.getInput("head_ref_branch"),
@@ -45046,11 +45046,22 @@ const input = {
 /**
  * @returns {boolean}
  */
-function isTargetBranchByPassConstrainsCheck() {
+function byPassConstrainsCheck() {
+  const sourceBranch = input.getSourceBranch();
   const targetBranch = input.getTargetBranch();
-  if (OBSERVABLE_TARGET_BRANCHES.indexOf(targetBranch) === -1) {
+
+  const isSourcePrincipal = PRINCIPAL_BRANCHES.indexOf(sourceBranch) !== -1;
+  const isTargetPrincipal = PRINCIPAL_BRANCHES.indexOf(targetBranch) !== -1;
+
+  if (!isTargetPrincipal) {
     core.info(
       "Nothing to do or check the pull request did not target branches that require contrains to be checked"
+    );
+    return true;
+  }
+  if(isSourcePrincipal && isTargetPrincipal){
+    core.info(
+        "Nothing to do or check the pull request merge a principal branch to another"
     );
     return true;
   }
@@ -45059,7 +45070,7 @@ function isTargetBranchByPassConstrainsCheck() {
 
 async function run() {
   try {
-    if (isTargetBranchByPassConstrainsCheck()) {
+    if (byPassConstrainsCheck()) {
       return;
     }
 
